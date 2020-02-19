@@ -26,11 +26,27 @@ public class MyDemoLoggingAspect {
 		System.out.println("\n===> Result is : " + result);
 
 		// modify "result" list, before return the data
+		// let's post-process the data ... let's modify it 
 		
+		// convert the account names to uppercase
+		convertAccountNamesToUpperCase(result);
 	}
 	
 	
 	
+	private void convertAccountNamesToUpperCase(List<Account> result) {
+		// loop through accounts
+		for (Account tempAccount: result) {
+			// get uppercase version of name
+			String theUpperName = tempAccount.getName().toUpperCase();
+			tempAccount.setName(theUpperName);
+		}
+		
+		// update the name on the account
+	}
+
+
+
 	// before order is undefined, has no order
 	// let's start with and @Before advice
 	@Before("com.luv2code.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
