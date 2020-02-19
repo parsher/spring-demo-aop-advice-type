@@ -16,7 +16,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.luv2code.aopdemo.Account;
-import com.luv2code.aopdemo.AroundWithLoggerDemoApp;
 
 @Aspect
 @Component
@@ -34,7 +33,16 @@ public class MyDemoLoggingAspect {
 		long begin = System.currentTimeMillis();
 		
 		// let's execute the method
-		Object result = theProceedingJoinPoint.proceed();
+		Object result = null;
+		
+		// we handle exception in here
+		try {
+			result = theProceedingJoinPoint.proceed();	
+		} catch(Exception e) {
+			myLogger.warning(e.getMessage());
+			
+			result = "Major accident! But no worries!";
+		}
 		
 		// get end timestamp
 		long end = System.currentTimeMillis();
