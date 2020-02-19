@@ -41,7 +41,8 @@ public class MyDemoLoggingAspect {
 		} catch(Exception e) {
 			myLogger.warning(e.getMessage());
 			
-			result = "Major accident! But no worries!";
+			// rethrow exception
+			throw e;
 		}
 		
 		// get end timestamp
